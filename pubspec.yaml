@@ -1,0 +1,58 @@
+name: artha
+description: Privacy-first AI personal finance assistant
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management — shares data between screens automatically
+  flutter_riverpod: ^2.4.9
+
+  # Encrypted database — sqflite with AES-256 encryption built in
+  sqflite_sqlcipher: ^3.4.0
+  path: ^1.9.0
+
+  # Stores encryption key safely in Android hardware
+  flutter_secure_storage: ^9.0.0
+
+  # Fingerprint / face unlock
+  local_auth: ^2.1.7
+
+  # Reads SMS messages from your inbox
+  telephony: ^0.2.0
+
+  # Draws charts and graphs
+  fl_chart: ^0.66.2
+
+  # Lets user pick a file from phone storage
+  file_picker: ^6.1.1
+  csv: ^6.0.0
+
+  # Makes HTTP requests to Ollama on your laptop
+  http: ^1.2.1
+
+  # Requests permissions (SMS, biometric) from the user
+  permission_handler: ^11.2.0
+
+  # Simple key-value storage for small settings
+  shared_preferences: ^2.2.2
+
+  # Date formatting like "15 Apr 2025"
+  intl: ^0.19.0
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon/
