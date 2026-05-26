@@ -91,10 +91,8 @@ class DashboardScreen extends ConsumerWidget {
               data: (data) => data.isEmpty
                   ? _EmptyState(
                       onImport: () async {
-                        final count = await SmsService
-                            .instance
-                            .importInbox();
-                        refreshAll(ref);
+                        final transactions = await SmsService.readSmsTransactions();
+                        final count = transactions.length;
                         if (context.mounted) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(

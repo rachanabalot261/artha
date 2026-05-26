@@ -24,7 +24,6 @@ dependencies:
   local_auth: ^2.1.7
 
   # Reads SMS messages from your inbox
-  telephony: ^0.2.0
 
   # Draws charts and graphs
   fl_chart: ^0.66.2

@@ -18,19 +18,13 @@ class _SettingsScreenState
   bool _importing = false;
 
   Future<void> _importSms() async {
-    setState(() => _importing = true);
-    final n = await SmsService.instance.importInbox();
+    final results = await SmsService.readSmsTransactions();
+    final n = results.length;
     if (!mounted) return;
-    setState(() => _importing = false);
-    refreshAll(ref); // refresh all screens with new data
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(n > 0
-          ? '✓ $n transactions imported from SMS'
-          : 'No new transactions found'),
-      backgroundColor:
-          n > 0 ? AppColors.income : AppColors.expense,
-    ));
-  }
+    ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('$n transactions found')),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
