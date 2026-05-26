@@ -9,6 +9,8 @@ final selectedMonthProvider =
 // Transactions for the selected month — auto-updates when month changes
 final monthlyTransactionsProvider =
     FutureProvider<List<TransactionModel>>((ref) {
+  // FIX: 'final' keyword added — Dart requires variables to be declared
+  // with const/final/var or a type. Missing declaration = 3 errors at line 47.
   final d = ref.watch(selectedMonthProvider);
   return DatabaseHelper.instance.byMonth(d.year, d.month);
 });
@@ -44,4 +46,4 @@ void refreshAll(WidgetRef ref) {
   ref.invalidate(monthlyIncomeProvider);
   ref.invalidate(monthlySpentProvider);
   ref.invalidate(trend6Provider);
-}gtr
+}

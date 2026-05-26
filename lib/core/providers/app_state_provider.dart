@@ -2,35 +2,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../security/auth_service.dart';
 import '../security/key_manager.dart';
 
-// The four possible states of the app on launch
-enum LockState {
+// FIX: Renamed from LockState → AppLockState to avoid conflict with
+// Flutter's own LockState class in package:flutter/src/widgets/...
+// This eliminates all 4 ambiguous_import errors in app.dart
+enum AppLockState {
   checking,  // figuring out what state we're in
   locked,    // show lock screen
   unlocked,  // show main app
-  noAuth     // device has no biometrics — skip lock
+  noAuth,    // device has no biometrics — skip lock
 }
 
-class AppStateNotifier extends StateNotifier<LockState> {
-  AppStateNotifier() : super(LockState.checking) {
-    _init(); // immediately figure out state on creation
+class AppStateNotifier extends StateNotifier<AppLockState> {
+  AppStateNotifier() : super(AppLockState.checking) {
+    _init();
   }
 
   Future<void> _init() async {
     final hasKey = await KeyManager.instance.hasKey();
     if (!hasKey) {
-      // First ever launch — generate key, skip lock this time
       await KeyManager.instance.getOrCreateKey();
-      state = LockState.unlocked;
+      state = AppLockState.unlocked;
       return;
     }
     final supported = await AuthService.instance.isSupported();
-    state = supported ? LockState.locked : LockState.noAuth;
+    state = supported ? AppLockState.locked : AppLockState.noAuth;
   }
 
-  void unlock() => state = LockState.unlocked;
-  void lock()   => state = LockState.locked;
+  void unlock() => state = AppLockState.unlocked;
+  void lock()   => state = AppLockState.locked;
 }
 
 final appStateProvider =
-    StateNotifierProvider<AppStateNotifier, LockState>(
+    StateNotifierProvider<AppStateNotifier, AppLockState>(
         (ref) => AppStateNotifier());
