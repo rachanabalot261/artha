@@ -1,5 +1,6 @@
 package com.example.artha
 
-import io.flutter.embedding.android.FlutterActivity
+// TO:
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity : FlutterActivity()
+class MainActivity: FlutterFragmentActivity()

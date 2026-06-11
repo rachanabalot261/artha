@@ -64,11 +64,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       text,
       (token) {
         streamed += token;
-        ref.read(chatProvider.notifier).updateLast(streamed);
+        if (mounted) ref.read(chatProvider.notifier).updateLast(streamed);
         _scrollDown();
       },
       () {
-        ref.read(isThinkingProvider.notifier).state = false;
+        if (mounted) ref.read(isThinkingProvider.notifier).state = false;
         _scrollDown();
       },
     );

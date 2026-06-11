@@ -21,7 +21,8 @@ dependencies:
   flutter_secure_storage: ^9.0.0
 
   # Fingerprint / face unlock
-  local_auth: ^2.1.7
+  local_auth: ^3.0.1
+  local_auth_android: ^2.0.8
 
   # Reads SMS messages from your inbox
 
@@ -29,7 +30,7 @@ dependencies:
   fl_chart: ^0.66.2
 
   # Lets user pick a file from phone storage
-  file_picker: ^6.1.1
+  file_picker: ^8.1.2
   csv: ^6.0.0
 
   # Makes HTTP requests to Ollama on your laptop

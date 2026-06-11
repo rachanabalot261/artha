@@ -18,15 +18,15 @@ class AppStateNotifier extends StateNotifier<AppLockState> {
   }
 
   Future<void> _init() async {
-    final hasKey = await KeyManager.instance.hasKey();
-    if (!hasKey) {
-      await KeyManager.instance.getOrCreateKey();
-      state = AppLockState.unlocked;
-      return;
-    }
-    final supported = await AuthService.instance.isSupported();
-    state = supported ? AppLockState.locked : AppLockState.noAuth;
+  final hasKey = await KeyManager.instance.hasKey();
+  if (!hasKey) {
+    await KeyManager.instance.getOrCreateKey();
+    state = AppLockState.unlocked;
+    return;
   }
+  final supported = await AuthService.instance.isSupported();
+  state = supported ? AppLockState.locked : AppLockState.noAuth;
+}
 
   void unlock() => state = AppLockState.unlocked;
   void lock()   => state = AppLockState.locked;

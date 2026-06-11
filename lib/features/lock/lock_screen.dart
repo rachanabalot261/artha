@@ -24,8 +24,6 @@ class _LockScreenState extends State<LockScreen>
         vsync: this,
         duration: const Duration(milliseconds: 350));
     // Auto-trigger fingerprint prompt on load
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _auth());
   }
 
   @override
@@ -35,12 +33,13 @@ class _LockScreenState extends State<LockScreen>
   }
 
   Future<void> _auth() async {
-    if (_busy) return;
-    setState(() {
-      _busy = true;
-      _error = null;
-    });
-
+  if (_busy) return;
+  // Add this:
+  await Future.delayed(const Duration(milliseconds: 200));
+  setState(() {
+    _busy = true;
+    _error = null;
+  });
     final result = await AuthService.instance.authenticate();
 
     if (!mounted) return;
